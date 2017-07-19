@@ -11,66 +11,68 @@
 	</head>
 
 	<body>
-		<div class="moild">
+		   <div class="index">
+		   <div class="head">
 			<ul>
-				<li>
-					<span class="IMG"><img src="img/1.jpg"></span>
-					<span class="ghub">
-						我没有吉他就唱不出去歌
-					</span>
-					<div class="jimu">飞</div>
-				</li>
-				<li>
-					<span class="IMG"><img src="img/2.jpeg"></span>
-					<span class="ghub">
-						我没有吉他就唱不出去歌
-					</span>
-					<div class="jimu">飞</div>
-				</li>
+				<li><a>导航一</a></li>
+				<li><a>导航二</a></li>
+				<li><a>导航三</a></li>
 			</ul>
-		</div>
-		<div id="model">
-			<span class="hezi">0</span>
+			</div>
+			<div class="on"></div>
+			
 		</div>
 		
+		<input id="index_input" type="hidden" value="1" />
 		<script>
-			var secch_if = $('#succh');
+		    var head_li=$('.head ul li');
+		    var index_input=$('#index_input').val();
+			var head_li_width=head_li.width();
+			var head_li_height=head_li.height();
+		   
+			var ON=$('.on');
+			
+			ON.css({
+			    'width':head_li_width+'px',
+			    'height':head_li_height+'px',
+			})
+	        ON.animate({
+	        	left:index_input*head_li_width+'px',
+	        })
+			
+		    head_li.on({
+		    click:function(){
+		        var _this=$(this).index();
+		       $('#index_input').val(_this);
+		    },
+		    mouseenter:function(){
+		        
+		    	var _this=$(this).index();
+		    	//console.log(_this);
+		    	var on_l= parseInt(head_li.width())*_this;
+		    	//console.log(on_l);
+		      $('.on').stop(true).animate({
+		      	 'left':on_l+'px',
+		      	 'width':head_li_width+'px'
+		      })
+		    		
+		    },
+		    mouseleave:function(){
+		    	var _this=$(this).index();
+		    	var on_l= parseInt(head_li.width())*_this;
+		    	var index_input=$('#index_input').val();
+		    	  //console.log(index_input) 获取当前val 里的值
+	            $('.on').animate({
+		      		'left':index_input*head_li_width+'px',	
+		      	})
+	           
+		    },
+		  
+		    
+		    
+		   })
 		
-			var hezi_l=$('.hezi').offset();
-	        var Null=0;
-			$('.jimu').click(function() {
-				Null++;
-				var _this = $(this);
-				var IMG = _this.parent().find('img');
-				var addclid=IMG.clone().css('opacity','0.6');
-                 $('body').append(addclid);
-                 addclid.css({
-                 	'z-index':99999,
-                 	'position':'absolute',
-                 	'height':IMG.height()+'px',
-                 	'width':IMG.width()+'px',
-                 	'top':IMG.offset().top+'px',
-                 	'left':IMG.offset().left+'px',
-                 })
-                 addclid.animate({
-                 	 'width':50+'px',
-                 	 'height':50+'px',
-                      'border-radius':100+'%',
-                 },function(){
-                 	 addclid.animate({
-                 	'top':($(document).height())/2+30+'px',
-                     'left':($(document).width())-($('#model').width())+'px',//当前窗口的宽度-购物车的宽度   
-                     'width':0,
-                     'height':0,
-                 	 },1500,function(){
-                     	
-                 	addclid.remove();
-                 	$('.hezi').html(Null);
-                })
-                 	 
-                 	})
-                return false
-			});
+			
 			
 		   
 		</script>
