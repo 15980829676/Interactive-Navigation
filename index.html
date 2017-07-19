@@ -22,7 +22,27 @@
 			<div class="on"></div>
 			
 		</div>
-		
+		<div class="moild">
+			<ul>
+				<li>
+					<span class="IMG"><img src="img/1.jpg"></span>
+					<span class="ghub">
+						我没有吉他就唱不出去歌
+					</span>
+					<div class="jimu">飞</div>
+				</li>
+				<li>
+					<span class="IMG"><img src="img/2.jpeg"></span>
+					<span class="ghub">
+						我没有吉他就唱不出去歌
+					</span>
+					<div class="jimu">飞</div>
+				</li>
+			</ul>
+		</div>
+		<div id="model">
+			<span class="hezi">0</span>
+		</div>
 		<input id="index_input" type="hidden" value="1" />
 		<script>
 		    var head_li=$('.head ul li');
@@ -72,7 +92,42 @@
 		    
 		   })
 		
-			
+			var secch_if = $('#succh');
+			var hezi_l=$('.hezi').offset();
+	        var Null=0;
+			$('.jimu').click(function() {
+				Null++;
+				var _this = $(this);
+				var IMG = _this.parent().find('img');
+				var addclid=IMG.clone().css('opacity','0.6');
+                 $('body').append(addclid);
+                 addclid.css({
+                 	'z-index':99999,
+                 	'position':'absolute',
+                 	'height':IMG.height()+'px',
+                 	'width':IMG.width()+'px',
+                 	'top':IMG.offset().top+'px',
+                 	'left':IMG.offset().left+'px',
+                 })
+                 addclid.animate({
+                 	 'width':50+'px',
+                 	 'height':50+'px',
+                      'border-radius':100+'%',
+                 },function(){
+                 	 addclid.animate({
+                 	'top':($(document).height())/2+30+'px',
+                     'left':($(document).width())-($('#model').width())+'px',//当前窗口的宽度-购物车的宽度   
+                     'width':0,
+                     'height':0,
+                 	 },1500,function(){
+                     	
+                 	addclid.remove();
+                 	$('.hezi').html(Null);
+                })
+                 	 
+                 	})
+                return false
+			});
 			
 		   
 		</script>
